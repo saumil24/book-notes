@@ -1,5 +1,4 @@
 # ITEM 1: CONSIDER STATIC FACTORY METHODS INSTEAD OF CONSTRUCTORS
-  Reasons:
     * unlike constructors, they have names
     * they are not required to create a new object each time they’re invoked
     * they can return an object of any subtype of their return type
@@ -9,13 +8,11 @@
     * second shortcoming of static factory methods is that they are hard for programmers to find
 
 # ITEM 2: CONSIDER A BUILDER WHEN FACED WITH MANY CONSTRUCTOR PARAMETERS
-  Reasons:
     * readability
     * cleaner api
     * also applicable to class hierarchy
 
 # ITEM 3: ENFORCE THE SINGLETON PROPERTY WITH A PRIVATE CONSTRUCTOR OR AN ENUM TYPE
-  Reasons:
     * Making a class a singleton can make it difficult to test its clients
 
 # ITEM 4: ENFORCE NONINSTANTIABILITY WITH A PRIVATE CONSTRUCTOR 
