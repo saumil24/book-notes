@@ -285,3 +285,32 @@
     * Avoid long parameter lists. Several ways of achieving this: break into multiple methods (eg List where instead of find first or last they opted for subList, indexOf, lastIndexOf methods which are more powerful and flexible), helper classes to hold groups of parameters, Builder pattern
     * For parameter types, favor interfaces over classes. By using a class instead of an interface, you restrict your client to a particular implementation and force an unnecessary and potentially expensive copy operation if the input data happens to exist in some other form.
     * Prefer two-element enum types to boolean parameters. Enums provide greater flexibility and readability.
+
+### ITEM 52: USE OVERLOADING JUDICIOUSLY
+    * selection among overloaded methods is static (compile time), while selection among overridden methods is dynamic (runtime). Avoid confusing use of overloading.
+    * Avoid exporting two overloaded methods with same number of parameters; it's hard to achieve that with constructors, static factories is one option
+    * Good practice in case of overloading: avoid situations where the same set of parameters can be passed to different overloadings by the addition of casts, if this is unavoidable then  ensure all overloadings behave identically when passed the same parameters 
+    * Auto-boxing and generics can cause trouble with overloading; List interface is an example for this with remove(T) vs remove(int) where both of them are functionally different but can cause confusion / errors for clients
+    * Avoid overloading methods to take different functional interfaces in the same argument position (overload resolution algo might not behave as you expect, look at book for example)
+
+### ITEM 53: USE VARARGS JUDICIOUSLY
+    * Precede varargs parameter with any required parameter to get rid of boilerplate checks (eg arr length runtime errors)
+    * varargs carry cost of inititializing arr and copying data, if that's unacceptable then overload for the most used number of parameter and have vararg method as a backup
+
+### ITEM 54: RETURN EMPTY COLLECTIONS OR ARRAYS, NOT NULLS
+    * Makes APIs difficult to use and more prone to error, also there is no performance advantage
+
+### ITEM 55: RETURN OPTIONALS JUDICIOUSLY
+    * Throwing exceptions can be expensive since you're now collecting entire stack trace and returning null makes api error prone and difficult to use
+    * Optional are analogous to checked exceptions since they give client a choice as to what action to take in case the value is not present
+    * Optional api provides a nice idiomatic way which is clear and consice representation of what the program is trying to achieve
+    * Java 9 added more methods to optional: or and ifPresentOrElse. Optional was outfitted with a stream() which is an adapter that turns optional into a stream containing an element if one is present and none otherwise
+    * Do not wrap container types into an optional since you can always return an empty container. ProcessHandle in Java 9 does that but consider it as an anomaly
+    * There are primitive, int long and double,  optionals to prevent auto-boxing so leverage thoseand   
+    * Ideally, the correct way to use optional is just as a return type (there are some cases, eg member var for class with a lot of members, which can be considered as exception to this rule)
+    * There is a minor performance cost to optional since it's an object that needs to be allocated and initialized
+
+### ITEM 56: WRITE DOC COMMENTS FOR ALL EXPOSED API ELEMENTS
+    * Refer to the guide for [java doc](https://www.oracle.com/technetwork/java/javase/documentation/index-137868.html); it's not update since Java 4, additional items since then are `@literal` and `@code` in Java 5; `@implSpec` in Java 8; `@index` in Java 9
+    * Refer book for examples
+
