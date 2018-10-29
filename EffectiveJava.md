@@ -24,8 +24,8 @@
 
 ### ITEM 6: AVOID CREATING UNNECESSARY OBJECTS
     * Can impact performance and clarity of your code
-    * conter point to this item is defensive object copying
-    * eg. new String("abc"), auto-boxing, keySet on a map object
+    * counter point to this item is defensive object copying
+    * eg. new String("abc"), auto-boxing, keySet which is a set view on a map object and returns the same object on each invocation
 
 ### ITEM 7: ELIMINATE OBSOLETE OBJECT REFERENCES
     * Whenever a class manages it's own memory then there is a risk of memory leak
@@ -314,3 +314,47 @@
     * Refer to the guide for [java doc](https://www.oracle.com/technetwork/java/javase/documentation/index-137868.html); it's not update since Java 4, additional items since then are `@literal` and `@code` in Java 5; `@implSpec` in Java 8; `@index` in Java 9
     * Refer book for examples
 
+### ITEM 57: MINIMIZE THE SCOPE OF LOCAL VARIABLES
+    * keep methods small and focused
+    * get in the habbit of declaring the variable as close as possible to it's use, to prevent accidents
+
+### ITEM 58: PREFER FOR-EACH LOOPS TO TRADITIONAL FOR LOOPS
+    * for-each provide cleaner and flexible api without any performance penalty, barring some obvious cases where you cannot use for-each
+
+### ITEM 59: KNOW AND USE THE LIBRARIES
+    * by using a standard library, you take advantage of the knowledge of the experts who wrote it and the experience of those who used it before you
+    * spending time in solving application problem might be more desirable than figuring out low level issues, unless that's what you're interested in
+    * every java programmer should at least be familiar with the basics of java.lang, java.util, and java.io, and their subpackages
+
+### ITEM 60: AVOID FLOAT AND DOUBLE IF EXACT ANSWERS ARE REQUIRED
+    * don’t use float or double for any calculations that require an exact answer
+    * use BigDecimal if you want the system to keep track of the decimal point and you don’t mind the inconvenience and cost of not using a primitive type; otherwise int and long should be use
+
+### ITEM 61: PREFER PRIMITIVE TYPES TO BOXED PRIMITIVES
+    * never apply == operator to boxed primitives
+    * mixing primitives and boxed primitives in an operation, the boxed primitive is auto-unboxed and if the boxed primitive is uninitialized then an NPE would occur
+    * lastly there are performance costs with boxed primitives
+    * use of boxed primitives is justified in parameterized types and methods and reflective method invocations
+
+### ITEM 62: AVOID STRINGS WHERE OTHER TYPES ARE MORE APPROPRIATE
+    * always use suitable types instead of representing data inappropriately with Strings. If used incorrectly strings can be cumbersome, less flexible, slower, and more error-prone than other types
+
+### ITEM 63: BEWARE THE PERFORMANCE OF STRING CONCATENATION
+    * String is a value class so avoid using it with concat operator, use StringBuilder instead
+
+### ITEM 64: REFER TO OBJECTS BY THEIR INTERFACES
+    * If there is no appropriate interface, just use the least specific class in the class hierarchy that provides the required functionality
+
+### ITEM 65: PREFER INTERFACES TO REFLECTION
+    * Reflection is a powerful facility that is required for certain sophisticated system programming tasks, but it has many disadvantages
+    * If writing a program that has to work with classes unknown at compile time, try to use reflection only to instantiate objects, and access the objects using some interface or superclass that is known at compile time
+
+### ITEM 66: USE NATIVE METHODS JUDICIOUSLY
+    * several disadvantages to JNI: not immune to memory corruption, platform dependent, harder to debug, can cause decreased performance, need 'glue code' which affects readability and maintainability
+
+### ITEM 67: OPTIMIZE JUDICIOUSLY
+    * think about performance while designing systems, api, wire-level protocols and persistent data formats
+    * never optimize based on a hunch, locate the source of the poblem with a profiler or some <i>microbenchmarking framwork</i>; and always measure before and after every change
+
+### ITEM 68: ADHERE TO GENERALLY ACCEPTED NAMING CONVENTIONS
+    * Refer to book for a synopsis on common JLS on naming conventions
